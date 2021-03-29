@@ -1,0 +1,26 @@
+header{
+    background-color: black;
+}
+
+body{
+    background-color: red;
+}
+
+.titulo {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+footer{
+    background-color: white;
+}
+
+.info{
+    border-style: dotted;   
+       border-width: thick;
+    border-color: teal;
+}
+
+.subtitulo{
+    color: violet;
+}
