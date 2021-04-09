@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 
 class Info extends Component {
-    
     masInfo = (color) => {
          console.log("mas info");
          alert (
