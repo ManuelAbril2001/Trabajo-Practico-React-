@@ -1,5 +1,6 @@
 header{
     background-color: black;
+    color: white;
 }
 
 body{
@@ -10,17 +11,23 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-
-footer{
-    background-color: white;
+.imagen{
+    width: 10%;
 }
 
 .info{
     border-style: dotted;   
-       border-width: thick;
+    border-width: thick;
     border-color: teal;
 }
 
 .subtitulo{
     color: violet;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: right;
+
 }

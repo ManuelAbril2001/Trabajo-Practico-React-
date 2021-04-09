@@ -3,7 +3,7 @@ import React from 'react';
 function Footer (){
     return( 
         <footer>
-            Nombres:
+            Manuel Abril, Matias Capparelli, Valentina Campitelli
         </footer>
     )
 }
