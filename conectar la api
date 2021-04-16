@@ -1,0 +1,115 @@
+Como conectar la api
+en App.js:
+
+import Child from './Components/Child';
+import api;
+
+export default class App extends Component{
+    constructor(){
+        super();
+        this.state - {
+            contador: 1,
+            items:[]
+        }
+    }
+
+    componentDidMount(){
+        fetch("https://randomuser.me/api/?inc=name,login&results=10")
+        .then(resource => resource.json())
+        .then(data => {
+            this.setState({items: data.results});
+            console.log(this.state.items);
+        })
+    }
+
+    agregarTarjeta(){
+         fetch("https://randomuser.me/api/?inc=name,login")
+        .then(resource => resource.json())
+        .then(data => {
+            console.log(data)
+            this.state.items.push(data.results[0]);
+            this.setState({items: this.state.items});
+        })
+        
+        //this.setState({contador:this.state.contador + 1});
+    }
+
+    borrarItem(idItem){
+        console.log("Item a eliminar: " = idItem);
+        let resultado = this.state.items.filter((item)=> {
+            return item.login.uuid!== idItem
+        })
+        this.setState({items: resultado});
+    }
+
+    reset(){
+        this.setState({items: []})
+    }
+
+    render(){
+        return(
+            <div className=""> 
+            ID items a crear: {this.state.contador}<br/>
+            <button onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
+            {
+                this.state.items.map((item) =>
+                (
+                    <Child onDelete={this.borrarItem.bind(this)} 
+                        key={item.login.uuid} 
+                        id={item.login.uuid} 
+                        nombre={item.name.first} 
+                        apellido={item.name.last}/>
+                )
+
+                )
+            }
+            
+            </div>
+        )
+    }
+}
+
+
+en child.js: 
+
+import {Component} from 'react';
+export default class Child extends Component{
+    constructor(){
+        super();
+        this.state = {
+            color:'black'
+        }
+    }
+
+    cambiarColor(nuevoColor){
+        this.setState({color: nuevoColor})
+    }
+
+    componentDidMount()){
+        console.log("Se crea tarjeta: (" + this.props.id + ")" + this.props.name);
+    }
+
+    componentDidUpdate(prevProps, prevStates){
+        console.log("Se actualiza tarjeta: (" + this.props.id + ")");
+        
+        console.log(prevProps);
+        console.log(prevStates.color + " -> " + this.state.color); 
+    }
+
+    componentWillUnmount(){
+        console.log("Se borra tarjeta: (" + this.props.id + ")");
+    }
+
+    render(){
+        return(
+        <div className="" style={{borderColor: this.state.color}}
+            onMouseEnter={this.cambiarColor.bind(this,"red")}
+            onMouseLeave={this.cambiarColor.bind(this,"black")}
+            onClick={this.props.onDelete.bind(this, this.props.id)}
+            > 
+            <div>{this.props.id})</div>
+            <div>{this.props.name}, {this.props.lastname}</div>
+        </div>
+        )
+    }
+}

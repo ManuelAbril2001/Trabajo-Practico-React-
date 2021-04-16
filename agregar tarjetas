@@ -1,0 +1,66 @@
+para agregar tarjetas
+
+en App.js:
+
+import Child from './Components/Child';
+import api;
+
+export default class App extends Component{
+    constructor(){
+        super();
+        this.state - {
+            contador: 1,
+            items:[]
+        }
+    }
+
+    agregarTarjeta(){
+        this.state.items.push({id: this.state.contador, nombre: nombres[Math.floor(Math.random()*this.state.items.length)]))
+        this.setState({contador:this.state.contador + 1});
+    }
+
+    render(){
+        return(
+            <div className=""> 
+            ID items a crear: {this.state.contador}<br/>
+            <button onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
+            {
+                this.state.items.map((item) =>
+                (
+                <Child id={item.id} nombre={item.nombre}/>
+                )
+
+                )
+            }
+            </div>
+        )
+    }
+}
+
+
+
+
+en Child.js:
+import {Component} from 'react';
+export default class Child extends Component{
+    constructor(){
+        super();
+        this.state = {
+            color:'black'
+        }
+    }
+
+    cambiarColor(nuevoColor){
+        this.setState({color: nuevoColor})
+    }
+
+    render(){
+        return(
+        <div className="" style={{borderColor: this.state.color}}
+            onMouseEnter={this.cambiarColor.bind(this,"red")}
+            onMouseLeave={this.cambiarColor.bind(this,"black")}> 
+            ({this.props.id}) - {this.props.nombre}
+        </div>
+        )
+    }
+}
