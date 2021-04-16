@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 
 
 class Info extends Component {
+    
     masInfo = (color) => {
-         console.log("mas info");
-         alert (
-             'toma tu info'
-         );
+         alert('funciona boton')
+        //  document.getElementById(infoextra).style.display = "none";
     }
 
     render(){
@@ -19,6 +18,16 @@ class Info extends Component {
             <h2> Fecha de nacimiento: {this.props.nacimiento} </h2>
             <h3 onClick={() => this.masInfo()}> Mas informacion, click aqui</h3>
         </div>
+``
+        <div className="masInfo" id="infoextra"> 
+            <h2>Calle y numero: </h2>
+            <h2>Ciudad: </h2>
+            <h2>Pais: </h2>
+            <h2>Codigo postal: </h2>
+            <h2>Fecha de registro: </h2>
+            <h2>Telefono: </h2>
+        </div>
+
 
     </React.Fragment> 
      )
