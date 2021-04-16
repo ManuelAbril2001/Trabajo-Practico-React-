@@ -1,8 +1,7 @@
 Como conectar la api
 en App.js:
 
-import Child from './Components/Child';
-import api;
+import Tarjeta from './Components/Tarjeta';
 
 export default class App extends Component{
     constructor(){
@@ -54,7 +53,7 @@ export default class App extends Component{
             {
                 this.state.items.map((item) =>
                 (
-                    <Child onDelete={this.borrarItem.bind(this)} 
+                    <Tarjeta onDelete={this.borrarItem.bind(this)} 
                         key={item.login.uuid} 
                         id={item.login.uuid} 
                         nombre={item.name.first} 
@@ -73,7 +72,7 @@ export default class App extends Component{
 en child.js: 
 
 import {Component} from 'react';
-export default class Child extends Component{
+export default class Tarjeta extends Component{
     constructor(){
         super();
         this.state = {

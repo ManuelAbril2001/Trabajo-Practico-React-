@@ -3,7 +3,6 @@ para borrar tarjetas
 en App.js:
 
 import Child from './Components/Child';
-import api;
 
 export default class App extends Component{
     constructor(){

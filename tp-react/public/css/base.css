@@ -1,19 +1,20 @@
 /* HEADER */
 header{
-    background-color: black;
+    background-color: grey;
     color: white;
 }
 
 /* BODY */
 
 body{
-    background-color: red;
+    background-color: green;
 }
 
 /* TARJETAS */
 
 .titulo {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
 }
 
 .imagen{
@@ -22,9 +23,11 @@ body{
 
 
 .info{
-    border-style: dotted;   
+    border-style: dotted;
     border-width: thick;
-    border-color: teal;
+    color: white;
+    margin-bottom: 30px;
+    border-color: red;
 }
 
 .subtitulo{
