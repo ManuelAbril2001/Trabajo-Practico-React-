@@ -1,20 +1,25 @@
 /* HEADER */
 header{
-    background-color: grey;
+    background-color: black;
     color: white;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
 }
 
 /* BODY */
 
 body{
-    background-color: green;
+    background-color: white;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /* TARJETAS */
 
 .titulo {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    color: purple;
+    text-align: center;
+    font-weight: bold;
 }
 
 .imagen{
@@ -23,11 +28,13 @@ body{
 
 
 .info{
-    border-style: dotted;
+    border-style:groove;
     border-width: thick;
-    color: white;
-    margin-bottom: 30px;
-    border-color: red;
+    color: black;
+    margin: 10px;
+    border-color: white;
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
 }
 
 .subtitulo{
@@ -35,7 +42,46 @@ body{
 }
 
 .masInfo{
-    display: none;
+    display: onCLick;
+    color: cadetblue;
+}
+
+
+button{
+    background: transparent;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.agregar:hover {
+    background-color: #86945e ;
+    color: white;
+}
+
+.agregar{
+    border: 2px solid #86945e;
+    position: relative;
+    float: right;
+}
+
+.borrar{
+    border: 2px solid brown;
+    margin-bottom: 2px;
+}
+
+.borrar:hover {
+    background-color: brown;
+    color: white;
+}
+
+.detalle{
+    border: 2px solid blueviolet;
+    margin-bottom: 2px;
+}
+
+.detalle:hover {
+    background-color: blueviolet;
+    color: white;
 }
 
 /* FOOTER */
@@ -43,6 +89,6 @@ body{
 footer{
     background-color: black;
     color: white;
+    font-family: 'Courier New', Courier, monospace;
     text-align: right;
-
 }

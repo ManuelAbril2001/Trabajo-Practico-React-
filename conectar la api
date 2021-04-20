@@ -6,7 +6,7 @@ import Tarjeta from './Components/Tarjeta';
 export default class App extends Component{
     constructor(){
         super();
-        this.state - {
+        this.state = {
             contador: 1,
             items:[]
         }
