@@ -41,10 +41,6 @@ body{
     color: violet;
 }
 
-.masInfo{
-    display: onCLick;
-    color: cadetblue;
-}
 
 
 button{
@@ -74,14 +70,20 @@ button{
     color: white;
 }
 
-.detalle{
+.detalles{
     border: 2px solid blueviolet;
     margin-bottom: 2px;
 }
 
-.detalle:hover {
+
+
+.detalles:hover {
     background-color: blueviolet;
     color: white;
+}
+
+.detalle{
+    display: none;
 }
 
 /* FOOTER */

@@ -1,8 +1,17 @@
 import React from 'react';
 //import Info from './Info';
 import {Component} from 'react';
+import {Modal, TextField, Button, withWidth} from '@material-ui/core';
+import {makestyles, withTheme} from '@material-ui/core/styles';
+
+
+
 
 class Tarjeta extends Component{
+  
+
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -32,6 +41,19 @@ class Tarjeta extends Component{
           )
       }
 
+      // desplegarInfo(){
+      //   function desplegarInfo() {
+      //     document.getElementById(detalle).style.display = "block";
+      // }
+      // }
+
+      // cerrarInfo(){
+      //   function cerrarInfo() {
+      //     document.getElementById(detalle).style.display = "none";
+          
+      //   }
+      // }
+
   agregarTarjeta(){
       fetch("https://randomuser.me/api/")
        .then(resource => resource.json())
@@ -59,9 +81,11 @@ class Tarjeta extends Component{
     } else {
       return (
         <React.Fragment>
+        
         <h1 className="titulo">T A R J E T A S</h1>
         <ul>
-          <div><button className="agregar" onClick={this.agregarTarjeta.bind(this)}> Agregar X tarjetas </button></div>
+          <div><button className="agregar" onClick={this.agregarTarjeta.bind(this)}> Agregar tarjetas </button></div>
+          
           <br></br>
           {items.map(item => (
             <div className="info" key={item.login.uuid}>
@@ -70,18 +94,20 @@ class Tarjeta extends Component{
               <div> Email: {item.email} </div>
               <div> Fecha de nacimiento: {item.dob.date} ({item.dob.age}) </div>
               <div>
-                <button className="detalle"> Ver más detalles </button> 
-                  <div className="masInfo" id="MasInfo"> 
+                {/* <button onclick={this.desplegarInfo(this)} className="detalles"> Ver más detalles </button> 
+                <div id = "detalle"> 
                     <div>Calle y número:{item.location.street.number} </div>
                     <div>Ciudad: {item.location.city} </div>
                     <div>País: {item.location.country}</div>
                     <div>Código postal: {item.location.postcode}</div>
                     <div>Fecha de registro: {item.registered.date}</div>
                     <div>Teléfono: {item.phone}</div>
-                  </div>
+                    <Button onclick={()=>this.cerrarInfo()}> Cancelar</Button>
+                </div> */}
+
               </div>
               <br></br>
-              <button className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}>
+              <button id="cerrarDetalle" className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}>
                     Eliminar esta tarjeta
               </button>
             </div>
