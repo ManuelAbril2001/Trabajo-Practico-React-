@@ -26,7 +26,6 @@ body{
     width: 10%;
 }
 
-
 .info{
     border-style:groove;
     border-width: thick;
@@ -36,12 +35,6 @@ body{
     font-family: 'Courier New', Courier, monospace;
     position: relative;
 }
-
-.subtitulo{
-    color: violet;
-}
-
-
 
 button{
     background: transparent;
@@ -75,16 +68,14 @@ button{
     margin-bottom: 2px;
 }
 
-
-
 .detalles:hover {
     background-color: blueviolet;
     color: white;
 }
-
+/* 
 .detalle{
     display: none;
-}
+} */
 
 /* FOOTER */
 

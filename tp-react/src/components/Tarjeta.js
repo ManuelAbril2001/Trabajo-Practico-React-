@@ -1,23 +1,17 @@
 import React from 'react';
 //import Info from './Info';
 import {Component} from 'react';
-import {Modal, TextField, Button, withWidth} from '@material-ui/core';
-import {makestyles, withTheme} from '@material-ui/core/styles';
-
-
-
+//import {Modal, TextField, Button, withWidth} from '@material-ui/core';
+//import {makestyles, withTheme} from '@material-ui/core/styles';
+import Masinfo from './Masinfo';
 
 class Tarjeta extends Component{
-  
-
-
-
     constructor(props) {
         super(props);
         this.state = {
           error: null,
           isLoaded: false,
-          items: []
+          items: [],
         };
       }
     
@@ -92,19 +86,9 @@ class Tarjeta extends Component{
               Nombre y apellido: {item.name.first} {item.name.last} <br></br>
               <img src={item.picture.medium} className="imagen"/>
               <div> Email: {item.email} </div>
-              <div> Fecha de nacimiento: {item.dob.date} ({item.dob.age}) </div>
-              <div>
-                {/* <button onclick={this.desplegarInfo(this)} className="detalles"> Ver más detalles </button> 
-                <div id = "detalle"> 
-                    <div>Calle y número:{item.location.street.number} </div>
-                    <div>Ciudad: {item.location.city} </div>
-                    <div>País: {item.location.country}</div>
-                    <div>Código postal: {item.location.postcode}</div>
-                    <div>Fecha de registro: {item.registered.date}</div>
-                    <div>Teléfono: {item.phone}</div>
-                    <Button onclick={()=>this.cerrarInfo()}> Cancelar</Button>
-                </div> */}
-
+              <div> Fecha de nacimiento: {item.dob.date.substring(0,10)} ({item.dob.age}) </div>
+               <div>
+               <button className="detalles"> Ver más detalles </button>
               </div>
               <br></br>
               <button id="cerrarDetalle" className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}>
