@@ -8,6 +8,9 @@ import Masinfo from './Masinfo';
 class Tarjeta extends Component{
     constructor(props) {
         super(props);
+        this.detalle = React.createRef()
+        this.desplegarInfo = this.desplegarInfo.bind( this )
+        
         this.state = {
           error: null,
           isLoaded: false,
@@ -35,18 +38,16 @@ class Tarjeta extends Component{
           )
       }
 
-      // desplegarInfo(){
-      //   function desplegarInfo() {
-      //     document.getElementById(detalle).style.display = "block";
-      // }
-      // }
+      desplegarInfo(){
+     
+        this.detalle.current.style.display = 'block'
+ 
+      }
 
-      // cerrarInfo(){
-      //   function cerrarInfo() {
-      //     document.getElementById(detalle).style.display = "none";
-          
-      //   }
-      // }
+      cerrarInfo(){
+        this.detalle.current.style.display = 'none'
+ 
+      }
 
   agregarTarjeta(){
       fetch("https://randomuser.me/api/")
@@ -88,12 +89,24 @@ class Tarjeta extends Component{
               <div> Email: {item.email} </div>
               <div> Fecha de nacimiento: {item.dob.date.substring(0,10)} ({item.dob.age}) </div>
                <div>
-               <button className="detalles"> Ver más detalles </button>
+               <button className="detalles" onClick={this.desplegarInfo}> Ver más detalles </button>
               </div>
+
+              <div className="detalle" ref={this.detalle}>
+
+                    <div>Calle y número:{item.location.street.number} </div>
+                    <div>Ciudad: {item.location.city} </div>
+                    <div>País: {item.location.country}</div>
+                    <div>Código postal: {item.location.postcode}</div>
+                    <div>Fecha de registro: {item.registered.date.substring(0,10)}</div>
+                    <div>Teléfono: {item.phone}</div>
+              </div>
+
               <br></br>
               <button id="cerrarDetalle" className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}>
                     Eliminar esta tarjeta
               </button>
+
             </div>
           ))}
         </ul>
