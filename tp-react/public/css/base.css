@@ -3,7 +3,7 @@ header{
     background-color: black;
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    text-align: center;
+    text-align: left;
 }
 
 /* BODY */
@@ -11,6 +11,11 @@ header{
 body{
     background-color: white;
     font-family: 'Courier New', Courier, monospace;
+    font-size: xx-small;
+}
+
+.app{
+    position: relative;
 }
 
 /* TARJETAS */
@@ -22,18 +27,33 @@ body{
     font-weight: bold;
 }
 
-.imagen{
-    width: 10%;
-}
-
 .info{
     border-style:groove;
     border-width: thick;
     color: black;
     margin: 10px;
-    border-color: white;
+    border-color: rgb(69, 202, 87);
+    border-width: thin;
     font-family: 'Courier New', Courier, monospace;
-    position: relative;
+    padding: 10px;
+    width: 93%;
+    text-align: center;
+}
+
+.nombreapellido{
+    font-size: large;
+}
+
+.datos{
+    font-size: x-small;
+}
+
+.cosas1{
+    font-weight: bold;
+}
+
+.imagen{
+    width: 15%;
 }
 
 button{
@@ -53,9 +73,15 @@ button{
     float: right;
 }
 
+#formulario{
+    display: none;
+    float: right;
+}
+
 .borrar{
     border: 2px solid brown;
     margin-bottom: 2px;
+    float: right;
 }
 
 .borrar:hover {
@@ -64,24 +90,32 @@ button{
 }
 
 .detalles{
-    border: 2px solid blueviolet;
+    border: 2px solid lightgreen;
     margin-bottom: 2px;
+    font-size: xx-small;
 }
 
 .detalles:hover {
-    background-color: blueviolet;
+    background-color: lightgreen;
     color: white;
 }
 
 .detalle{
     display: none;
+    font-size: xx-small;
+}
+
+.cosas2{
+    text-decoration: underline gray;
 }
 
 /* FOOTER */
 
 footer{
     background-color: black;
+    font-size: xx-small;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     text-align: right;
+    position: relative;
 }
