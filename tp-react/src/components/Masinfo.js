@@ -2,10 +2,14 @@ import React from 'react';
 import {Component} from 'react';
 
 class Masinfo extends Component{
-    constructor(props) {
-        super(props);
+    constructor() {
+        super()
+        this.title = React.createRef()
+        this.desplegarInfo = this.desplegarInfo.bind(this)
         this.state = {
-          display: this.props.display,
+          error: null,
+          isLoaded: false,
+          items: []
         };
       }
     
@@ -29,6 +33,15 @@ class Masinfo extends Component{
           )
       }
 
+  desplegarInfo(){
+    console.log(this.title)
+    if(this.title.current.style.display === "none"){
+        this.title.current.style.display = "block";
+    } else{
+        this.title.current.style.display = "none";
+    }
+  }
+
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
@@ -38,18 +51,19 @@ class Masinfo extends Component{
     } else {
       return (
         <React.Fragment>
-        <ul>
-          {items.map(item => (
-            <div className="masInfo" key={item.login.uuid}>
-                    <div>Calle y número:{item.location.street.number} </div>
-                    <div>Ciudad: {item.location.city} </div>
-                    <div>País: {item.location.country}</div>
-                    <div>Código postal: {item.location.postcode}</div>
-                    <div>Fecha de registro: {item.registered.date.substring(0,10)}</div>
-                    <div>Teléfono: {item.phone}</div>
-                </div>
+          <div>
+            <button className="detalles" onClick={this.desplegarInfo}> Ver más detalles </button>
+              {items.map(item => (
+                <div id="detalle" className="detalle" ref={this.title} style={{display:'none'}}>
+                      <div><span className="cosas2">Calle y número:</span>{item.location.street.number}</div>
+                      <div><span className="cosas2">Ciudad:</span> {item.location.city}</div>
+                      <div><span className="cosas2">País:</span> {item.location.country}</div>
+                      <div><span className="cosas2">Código postal:</span>{item.location.postcode}</div>
+                      <div><span className="cosas2">Fecha de registro:</span>{item.registered.date.substring(0,10)}</div>
+                      <div><span className="cosas2">Teléfono:</span>{item.phone}</div>
+            </div>
           ))}
-        </ul>
+       </div>
         </React.Fragment>
       )
     }

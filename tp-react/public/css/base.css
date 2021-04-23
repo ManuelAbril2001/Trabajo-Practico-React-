@@ -12,6 +12,7 @@ body{
     background-color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: xx-small;
+    height: 100vh;
 }
 
 .app{
@@ -23,11 +24,11 @@ body{
 .invisible{
     display: none;
 }
+
 .buscador{
- 
     width: 80%;
     float: left;
-    
+    display: none;
 }
 
 .inputBuscador{
@@ -93,6 +94,39 @@ button{
     font-family: 'Courier New', Courier, monospace;
 }
 
+.orden:hover {
+    background-color:lightsteelblue;
+    color: white;
+}
+
+.orden{
+    border: 2px solid lightsteelblue;
+    position: relative;
+    float: right;
+}
+
+.filtros:hover {
+    background-color: rgb(66, 152, 238) ;
+    color: white;
+}
+
+.filtros{
+    border: 2px solid rgb(66, 152, 238) ;
+    position: relative;
+    float: right;
+}
+
+.inputBuscador{
+    border: 2px solid lightpink;
+    position: relative;
+    float: right;
+}
+
+.inputBuscador:hover {
+    background-color: lightpink ;
+    color: white;
+}
+
 .agregar:hover {
     background-color: #86945e ;
     color: white;
@@ -102,6 +136,17 @@ button{
     border: 2px solid #86945e;
     position: relative;
     float: right;
+}
+
+.botonagregar{
+    border: 2px solid lightseagreen;
+    margin-bottom: 2px;
+    font-size: xx-small;
+}
+
+.botonagreagar:hover {
+    background-color: lightseagreen;
+    color: white;
 }
 
 #formulario{
@@ -143,12 +188,9 @@ button{
 /* FOOTER */
 
 .divfoot{
-    position: absolute;
     bottom: 0;
     width: 100%;
 }
-
-
 
 footer{
     background-color: black;
@@ -156,5 +198,4 @@ footer{
     color: white;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
-    bottom: 0;
 }

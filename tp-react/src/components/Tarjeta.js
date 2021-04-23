@@ -1,28 +1,27 @@
 import React from 'react';
-//import Info from './Info';
 import {Component} from 'react';
+import Masinfo from './Masinfo';
+import Agregar from './Agregar';
 //import {Modal, TextField, Button, withWidth} from '@material-ui/core';
 //import {makestyles, withTheme} from '@material-ui/core/styles';
-//import Masinfo from './Masinfo';
 
 class Tarjeta extends Component{
     constructor(props) {
         super(props);
-        this.detalle = React.createRef()
-        this.desplegarInfo = this.desplegarInfo.bind( this )
-
+        // this.ordenarAscendente = this.ordenarAscendente.bind(this);
+        // this.ordenarDescendente = this.ordenarDescendente.bind(this);
+        this.state={
+          numero: "",
+        };
+        
         // buscador
-
         this.state={
           nombre:'',
           apellido:'',
           edad:','
         };
         this.handleInputChange = this.handleInputChange.bind(this);
-
-    
-        //buscador
-        
+        // buscador
         this.state = {
           error: null,
           isLoaded: false,
@@ -31,7 +30,7 @@ class Tarjeta extends Component{
       }
     
       componentDidMount() {
-        fetch("https://randomuser.me/api/?results=10")
+        fetch("https://randomuser.me/api/?results=2")
           .then(res => res.json())
           .then(
             (data) => {
@@ -59,18 +58,32 @@ class Tarjeta extends Component{
   
       }
 
-  desplegarInfo(){
-    var x = document.getElementById("detalle");
+
+      // FILTROS
+
+  filtrarTarjetas(){
+    var x = document.getElementById("buscador");
      if (x.style.display === "none") {
       x.style.display = "block";
     } else {
       x.style.display = "none";
     }
       console.log(x.style.display)
-  }
+  }   
 
-  agregarTarjeta(e){
-    e.preventDefault();
+  // ordenarAscendente(){
+  //   this.setState(prevState => {
+  //     this.state.item.name.sort((a,b) => (a.first - b.first))
+  //   });
+  // }
+
+  // ordenarDescendente(){
+  //   this.setState(prevState => {
+  //     this.state.item.name.sort((a,b) => (b.first - a.first))
+  //   });
+  // }
+
+  abrirFormulario(){
     var x = document.getElementById("formulario");
      if (x.style.display === "none") {
       x.style.display = "block";
@@ -78,17 +91,23 @@ class Tarjeta extends Component{
       x.style.display = "none";
     }
       console.log(x.style.display)
-      // fetch("https://randomuser.me/api/")
-      // .then(resource => resource.json())
-      // .then(data => {
-      //     console.log(data)
-      //     this.state.items.push(data.results[0]);
-      //     this.setState({items: this.state.items});
-      // })
+  }   
+
+  agregarTarjeta(){
+    console.log(this.state.numero)
+      fetch("https://randomuser.me/api/?results="+ this.state.numero )
+      .then(resource => resource.json())
+      .then(data => {
+        console.log(data)
+        let agregado = this.state.items.concat(data.results);
+        this.setState({items: agregado});
+    })
   }
 
 
-   borrarTarjeta(idItem){
+  // BORRAR
+
+  borrarTarjeta(idItem){
      console.log(idItem)
       let resultado = this.state.items.filter((item)=> {
           return item.login.uuid!== idItem
@@ -96,7 +115,9 @@ class Tarjeta extends Component{
       this.setState({items: resultado});
   }
 
-    handleInputChange(event) {
+
+  // FILTROS
+  handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -111,24 +132,30 @@ class Tarjeta extends Component{
     event.preventDefault();
   }
 
+
+  // VISTA
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div>Cargando...</div>;
     } else {
       return (
         <React.Fragment>
         
         <h1 className="titulo">Personas desconocidas</h1>
-        <ul>
+       
           <div>
-          <div className="buscador">
+          <div><button className="filtros" onClick={this.filtrarTarjetas.bind(this)}> Filtrar tarjetas </button></div>        
+          <br></br>
+          <br></br>
+          
+          <div id="buscador" className="buscador">
 
           {/* handleChange corre cada vez que una tecla es oprimida para actualizar el estado de React, el valor mostrado será actualizado mientras que el usuario escribe. */}
 
-          <form onSubmit={this.handleSubmit}>
+          <div onSubmit={this.handleSubmit}>
             <label>
                     <input 
                       value={this.state.nombre} onChange={this.handleChange} placeholder="Nombre"className="inputBuscador">
@@ -148,55 +175,50 @@ class Tarjeta extends Component{
              </label>
 
             <input className="invisible" type="submit" value="Submit" />
-          </form>
-
-          </div>
-          <div className="botonAgregar"><button className="agregar" onClick={this.agregarTarjeta.bind(this)}> Agregar tarjetas </button></div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <form id="formulario">
-            <label> Cuantas tarjetas queres agregar?
-              <input type="number"></input>
-            </label>
-          </form>
           </div>
 
+          </div>
+
+          {/* <div>
+           <button className="orden" onClick={this.ordenarAscendete}> Ascendente </button>
+           <button className="orden" onClick={this.ordenarDescendente}> Descendente </button>
+          </div> */}
+          <br></br>
+          <br></br>
+          </div>
+            
+          {/* <Agregar/> */}
+          <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
+          <br></br>
+          <br></br>
+          <br></br>
+          <div id="formulario">
+            ¿Cuantas tarjetas queres agregar?
+              <input type="number" onChange={(event) => this.setState({numero: event.target.value})}></input>
+              <button className="botonagregar" onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
+           </div>
+
+          
+        <ul>
           <br></br>
           {items.map(item => (
             <div className="info" key={item.login.uuid}>
               <button className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}> X </button>
+            
             <div className="datos"> 
               <span className="nombreapellido"> {item.name.first} {item.name.last} </span>
               <br></br>
-              <img src={item.picture.large} className="imagen"/>
+              <img src={item.picture.large} alt="foto de perfil" className="imagen"/>
               <div> <span className="cosas1">Email:</span> {item.email} </div>
               <div> <span className="cosas1">Fecha de nacimiento:</span> {item.dob.date.substring(0,10)} ({item.dob.age}) </div>
             </div>
-            
-               <div>
-            <button className="detalles" onClick={this.desplegarInfo}> Ver más detalles </button>
-              </div>
-              {/* onClick={this.desplegarInfo} */}
-              <div id="detalle" className="detalle" key={item.login.uuid}>
-              {/* ref={this.detalle} */}
-                    <div> <span className="cosas2">Calle y número:</span>{item.location.street.number} </div>
-                    <div><span className="cosas2">Ciudad:</span> {item.location.city} </div>
-                    <div><span className="cosas2">País:</span> {item.location.country}</div>
-                    <div><span className="cosas2">Código postal:</span>{item.location.postcode}</div>
-                    <div><span className="cosas2">Fecha de registro:</span>{item.registered.date.substring(0,10)}</div>
-                    <div><span className="cosas2">Teléfono:</span>{item.phone}</div>
-              </div>
+
+             <Masinfo/>
+
             </div>
           ))}
         </ul>
-        {/* <div>
-              <h4>Filtrar tarjetas </h4>
-              <h6>Nombre</h6>
-              <h6>Apellido</h6>
-              <h6>Edad</h6>
-              <h6>Ordenar de forma ascendente/descendente</h6>
-        </div> */}
+
         </React.Fragment>
       )
     }
