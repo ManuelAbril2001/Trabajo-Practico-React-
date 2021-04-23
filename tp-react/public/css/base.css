@@ -20,6 +20,37 @@ body{
 
 /* TARJETAS */
 
+.invisible{
+    display: none;
+}
+.buscador{
+ 
+    width: 80%;
+    float: left;
+    
+}
+
+.inputBuscador{
+    width: 20%;
+    position: relative;
+    border: 2px solid #86945e;
+    border-radius: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.inputBuscador:hover{
+    background-color: #86945e ;
+    color: white;
+
+}
+
+.botonAgregar{
+    width: 20%;
+    float: right;
+}
+
+
 .titulo {
     font-family: 'Courier New', Courier, monospace;
     color: purple;
@@ -111,11 +142,19 @@ button{
 
 /* FOOTER */
 
+.divfoot{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
 footer{
     background-color: black;
     font-size: xx-small;
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    text-align: right;
-    position: relative;
+    text-align: center;
+    bottom: 0;
 }
