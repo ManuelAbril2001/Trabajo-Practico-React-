@@ -56,7 +56,7 @@ class Masinfo extends Component{
               {items.map(item => (
                 <div id="detalle" className="detalle" ref={this.title} style={{display:'none'}}>
                       <div><span className="cosas2">Calle y número:</span>{item.location.street.number}</div>
-                      <div><span className="cosas2">Ciudad:</span> {item.location.city}</div>
+                      <div><span className="cosas2">Ciudad/Estado:</span> {item.location.city}</div>
                       <div><span className="cosas2">País:</span> {item.location.country}</div>
                       <div><span className="cosas2">Código postal:</span>{item.location.postcode}</div>
                       <div><span className="cosas2">Fecha de registro:</span>{item.registered.date.substring(0,10)}</div>

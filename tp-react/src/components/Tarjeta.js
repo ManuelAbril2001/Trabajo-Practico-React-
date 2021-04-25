@@ -8,10 +8,13 @@ import Agregar from './Agregar';
 class Tarjeta extends Component{
     constructor(props) {
         super(props);
-        // this.ordenarAscendente = this.ordenarAscendente.bind(this);
-        // this.ordenarDescendente = this.ordenarDescendente.bind(this);
+        this.ordenarAscendente = this.ordenarAscendente.bind(this);
+        this.ordenarDescendente = this.ordenarDescendente.bind(this);
         this.state={
           numero: "",
+          nombre: "",
+          apellido: "",
+          edad: "",
         };
         
         // buscador
@@ -30,7 +33,7 @@ class Tarjeta extends Component{
       }
     
       componentDidMount() {
-        fetch("https://randomuser.me/api/?results=2")
+        fetch("https://randomuser.me/api/?results=5")
           .then(res => res.json())
           .then(
             (data) => {
@@ -58,10 +61,13 @@ class Tarjeta extends Component{
   
       }
 
+  // DESPLAZAMIENTO
+  cambiarDespla(){
+   
+  }
 
-      // FILTROS
-
-  filtrarTarjetas(){
+  // FILTROS 
+  abrirFiltro(){
     var x = document.getElementById("buscador");
      if (x.style.display === "none") {
       x.style.display = "block";
@@ -69,20 +75,54 @@ class Tarjeta extends Component{
       x.style.display = "none";
     }
       console.log(x.style.display)
+  }
+
+  //Nombre
+  filtrarNombre(){
+      fetch("https://randomuser.me/api/?inc=name="+ this.state.nombre) 
+      .then(resource => resource.json())
+      .then(data => {
+        console.log(data)
+        let nombre = this.state.items.push(data.results);
+        this.setState({items: nombre});
+    })
   }   
 
-  // ordenarAscendente(){
-  //   this.setState(prevState => {
-  //     this.state.item.name.sort((a,b) => (a.first - b.first))
-  //   });
-  // }
+  //Apellido
+  filtrarApellido(){
+    fetch("https://randomuser.me/api/?inc=lastname="+ this.state.apellido) 
+    .then(resource => resource.json())
+    .then(data => {
+      console.log(data)
+      let apellido = this.state.items.push(data.results);
+      this.setState({items: apellido});
+  })
+  } 
 
-  // ordenarDescendente(){
-  //   this.setState(prevState => {
-  //     this.state.item.name.sort((a,b) => (b.first - a.first))
-  //   });
-  // }
+  //Edad
+  filtrarEdad(){
+    fetch("https://randomuser.me/api/?inc=age="+ this.state.edad) 
+    .then(resource => resource.json())
+    .then(data => {
+      console.log(data)
+      let edad = this.state.items.push(data.results);
+      this.setState({items: edad});
+  })
+  }   
 
+  ordenarAscendente(){
+    this.setState(prevState => {
+      this.state.item.name.sort((a,b) => (a.first - b.first))
+    });
+  }
+
+  ordenarDescendente(){
+    this.setState(prevState => {
+      this.state.item.name.sort((a,b) => (b.first - a.first))
+    });
+  }
+
+  // AGREGAR
   abrirFormulario(){
     var x = document.getElementById("formulario");
      if (x.style.display === "none") {
@@ -102,6 +142,13 @@ class Tarjeta extends Component{
         let agregado = this.state.items.concat(data.results);
         this.setState({items: agregado});
     })
+    var x = document.getElementById("formulario");
+     if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+      console.log(x.style.display)
   }
 
 
@@ -144,66 +191,67 @@ class Tarjeta extends Component{
       return (
         <React.Fragment>
         
-        <h1 className="titulo">Personas desconocidas</h1>
-       
-          <div>
-          <div><button className="filtros" onClick={this.filtrarTarjetas.bind(this)}> Filtrar tarjetas </button></div>        
-          <br></br>
-          <br></br>
+        <h1 className="titulo">TARJETAS</h1>
           
-          <div id="buscador" className="buscador">
+        <div className="horver">
+          <button className="desplazamiento" onClick={this.cambiarDespla.bind(this)}> Cambiar desplazamiento</button>
+        </div>
 
-          {/* handleChange corre cada vez que una tecla es oprimida para actualizar el estado de React, el valor mostrado será actualizado mientras que el usuario escribe. */}
+        <br></br>
 
-          <div onSubmit={this.handleSubmit}>
-            <label>
-                    <input 
-                      value={this.state.nombre} onChange={this.handleChange} placeholder="Nombre"className="inputBuscador">
-                    </input> 
-             </label>       
-             <label>
-                    <input 
-                      value={this.state.apellido} onChange={this.handleChange} placeholder="Apellido"className="inputBuscador">
-                    </input> 
+    <div>
+      <button className="filtros" onClick={this.abrirFiltro.bind(this)}> Filtrar tarjetas por: </button>
+        <div id="buscador" className="buscador">
+            {/* handleChange corre cada vez que una tecla es oprimida para actualizar el estado de React, el valor mostrado será actualizado mientras que el usuario escribe. */}
+        <div onSubmit={this.handleSubmit}>
+    
+        {/* Nombre */}
+          {/* <input value={this.state.nombre} onChange={this.handleChange} placeholder="Nombre"className="inputBuscador"></input>*/}
+              <input className="inputBuscador" placeholder="Nombre" onChange={(event) => this.setState({nombre: event.target.value})}></input>
+              <button className="buscar" onClick={this.filtrarNombre.bind(this)}> Filtrar por nombre </button>
+          <br></br>
 
-             </label>
-             <label>
-                    <input 
-                      value={this.state.edad} onChange={this.handleChange} placeholder="Edad"className="inputBuscador">
-                    </input> 
+        {/* Apellido */}
+          {/* <input value={this.state.apellido} onChange={this.handleChange} placeholder="Apellido"className="inputBuscador"> </input> S*/}
+          <input className="inputBuscador" placeholder="Apellido" onChange={(event) => this.setState({apellido: event.target.value})}></input>
+          <button className="buscar" onClick={this.filtrarApellido.bind(this)}> Filtrar por apellido </button>
+          <br></br>
 
-             </label>
+        {/* Edad */}
+           {/* <input value={this.state.edad} onChange={this.handleChange} placeholder="Edad"className="inputBuscador"> </input> */}
+          <input className="inputBuscador" placeholder="Edad" onChange={(event) => this.setState({edad: event.target.value})}></input> 
+          <button className="buscar" onClick={this.filtrarEdad.bind(this)}> Filtrar por edad </button> 
 
-            <input className="invisible" type="submit" value="Submit" />
-          </div>
 
-          </div>
-
-          {/* <div>
+      <div> Ordenar por: 
            <button className="orden" onClick={this.ordenarAscendete}> Ascendente </button>
            <button className="orden" onClick={this.ordenarDescendente}> Descendente </button>
-          </div> */}
-          <br></br>
-          <br></br>
-          </div>
+      </div>
+
+     </div>
+    </div>
+  </div>
             
           {/* <Agregar/> */}
-          <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
           <br></br>
-          <br></br>
-          <br></br>
-          <div id="formulario">
-            ¿Cuantas tarjetas queres agregar?
-              <input type="number" onChange={(event) => this.setState({numero: event.target.value})}></input>
-              <button className="botonagregar" onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
-           </div>
 
-          
-        <ul>
+          <div className="agregado">
+              <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
+                <br></br>
+                <br></br>
+              <div id="formulario">
+                  ¿Cuantas tarjetas queres agregar?
+                  <input className="valor" type="number" onChange={(event) => this.setState({numero: event.target.value})}></input>
+                  <button className="botonagregar" onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
+              </div>
+            </div>
           <br></br>
+          <br></br>
+        
+        <ul>
           {items.map(item => (
             <div className="info" key={item.login.uuid}>
-              <button className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}> X </button>
+             <button className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}> X </button>
             
             <div className="datos"> 
               <span className="nombreapellido"> {item.name.first} {item.name.last} </span>

@@ -13,9 +13,8 @@ class App extends Component{
     <div className="App">
      <Header/>
      <Tarjeta/>
-     <div className="divfoot">
      <Footer/>
-     </div>
+
     </div>
   );
   }

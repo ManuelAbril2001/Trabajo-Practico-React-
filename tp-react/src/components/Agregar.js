@@ -29,26 +29,34 @@ class Agregar extends Component{
           )
       }
 
-      abrirFormulario(){
-        var x = document.getElementById("formulario");
-         if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-          console.log(x.style.display)
-      }   
-    
-      agregarTarjeta(){
-        console.log(this.state.numero)
-          fetch("https://randomuser.me/api/?results="+ this.state.numero )
-          .then(resource => resource.json())
-          .then(data => {
-            console.log(data)
-            let agregado = this.state.items.concat(data.results);
-            this.setState({items: agregado});
-        })
-      }
+     // AGREGAR
+  abrirFormulario(){
+    var x = document.getElementById("formulario");
+     if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+      console.log(x.style.display)
+  }   
+
+  agregarTarjeta(){
+    console.log(this.state.numero)
+      fetch("https://randomuser.me/api/?results="+ this.state.numero )
+      .then(resource => resource.json())
+      .then(data => {
+        console.log(data)
+        let agregado = this.state.items.concat(data.results);
+        this.setState({items: agregado});
+    })
+    var x = document.getElementById("formulario");
+     if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+      console.log(x.style.display)
+  }
 
 
   render() {
@@ -60,19 +68,18 @@ class Agregar extends Component{
     } else {
       return (
         <React.Fragment>
-            <div className="botonAgregar">
-                <button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button>
-            </div>        
-            
-             <br></br>            
-             <br></br>
-             <br></br>
-
-            <div id="formulario">
-                ¿Cuantas tarjetas queres agregar?
-                <input type="number" onChange={(event) => this.setState({numero: event.target.value})}></input>
-                <button className="botonagregar" onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
-            </div>   
+            <div className="agregado">
+              <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
+                <br></br>
+                <br></br>
+              <div id="formulario">
+                  ¿Cuantas tarjetas queres agregar?
+                  <input className="valor" type="number" onChange={(event) => this.setState({numero: event.target.value})}></input>
+                  <button className="botonagregar" onClick={this.agregarTarjeta.bind(this)}> Agregar </button>
+              </div>
+            </div>
+          <br></br>
+          <br></br>
         </React.Fragment>
       )
     }
