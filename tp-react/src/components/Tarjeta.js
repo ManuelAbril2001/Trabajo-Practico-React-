@@ -12,24 +12,11 @@ class Tarjeta extends Component{
         this.ordenarDescendente = this.ordenarDescendente.bind(this);
         this.state={
           numero: "",
-          nombre: "",
-          apellido: "",
-          edad: "",
+          items: []
         };
         
         // buscador
-        this.state={
-          nombre:'',
-          apellido:'',
-          edad:','
-        };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        // buscador
-        this.state = {
-          error: null,
-          isLoaded: false,
-          items: [],
-        };
+
       }
     
       componentDidMount() {
@@ -38,11 +25,6 @@ class Tarjeta extends Component{
           .then(
             (data) => {
                 console.log(data)
-                var resultadosBusqueda = data.results.length
-
-                for (var i = 0; i < resultadosBusqueda.length; i++) {
-                  console.log(resultadosBusqueda[i]);
-                }
               this.setState({
                 isLoaded: true,
                 items: data.results
@@ -62,53 +44,12 @@ class Tarjeta extends Component{
       }
 
   // DESPLAZAMIENTO
-  cambiarDespla(){
+  // cambiarDespla(){
    
-  }
+  // }
 
-  // FILTROS 
-  abrirFiltro(){
-    var x = document.getElementById("buscador");
-     if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-      console.log(x.style.display)
-  }
 
-  //Nombre
-  filtrarNombre(){
-      fetch("https://randomuser.me/api/?inc=name="+ this.state.nombre) 
-      .then(resource => resource.json())
-      .then(data => {
-        console.log(data)
-        let nombre = this.state.items.push(data.results);
-        this.setState({items: nombre});
-    })
-  }   
-
-  //Apellido
-  filtrarApellido(){
-    fetch("https://randomuser.me/api/?inc=lastname="+ this.state.apellido) 
-    .then(resource => resource.json())
-    .then(data => {
-      console.log(data)
-      let apellido = this.state.items.push(data.results);
-      this.setState({items: apellido});
-  })
-  } 
-
-  //Edad
-  filtrarEdad(){
-    fetch("https://randomuser.me/api/?inc=age="+ this.state.edad) 
-    .then(resource => resource.json())
-    .then(data => {
-      console.log(data)
-      let edad = this.state.items.push(data.results);
-      this.setState({items: edad});
-  })
-  }   
+   
 
   ordenarAscendente(){
     this.setState(prevState => {
@@ -164,20 +105,33 @@ class Tarjeta extends Component{
 
 
   // FILTROS
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+  filtrarTarjetas(){
+    let filtrardata = document.getElementById("input").value
+    let filtrador = document.getElementById("select").value
 
-    this.setState({
-      [name]: value
-    });
+    console.log(filtrardata)
+    console.log(filtrador)
+
+
+    if (filtrador === "Edad"){
+      let resultado = this.state.items.filter( (item) => {
+        return item.dob.age == filtrardata 
+      }) 
+      this.setState({items: resultado})
+    } else if (filtrador === "Nombre"){
+      let resultado = this.state.items.filter( (item) => {
+        return item.name.first.includes(filtrardata)
+      })
+      this.setState({items: resultado})
+    } else if (filtrador === "Sexo"){
+      let resultado = this.state.items.filter( (item) => {
+        return item.gender === filtrardata
+      })  
+      this.setState({items:resultado})
+    }
   }
 
-  handleSubmit(event) {
-    alert('buscaste: ' + this.state.value);
-    event.preventDefault();
-  }
+
 
 
   // VISTA
@@ -193,47 +147,35 @@ class Tarjeta extends Component{
         
         <h1 className="titulo">TARJETAS</h1>
           
-        <div className="horver">
+        {/* <div className="horver">
           <button className="desplazamiento" onClick={this.cambiarDespla.bind(this)}> Cambiar desplazamiento</button>
-        </div>
+        </div> */}
 
         <br></br>
 
+
+ 
     <div>
-      <button className="filtros" onClick={this.abrirFiltro.bind(this)}> Filtrar tarjetas por: </button>
-        <div id="buscador" className="buscador">
-            {/* handleChange corre cada vez que una tecla es oprimida para actualizar el estado de React, el valor mostrado será actualizado mientras que el usuario escribe. */}
-        <div onSubmit={this.handleSubmit}>
+    <label>Filtrar</label>
+          <select id="select">
+               <option>Nombre</option>
+               <option>Edad</option>
+               <option>Sexo</option>
+          </select>
+
+                  <input className="inputData" id="input" name="filtro" />
+
+                  <div className="">
+                    <button className="" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
+                    <button className="" onClick={this.componentDidMount.bind(this)}>Resetear </button>
+                  </div>
+
     
-        {/* Nombre */}
-          {/* <input value={this.state.nombre} onChange={this.handleChange} placeholder="Nombre"className="inputBuscador"></input>*/}
-              <input className="inputBuscador" placeholder="Nombre" onChange={(event) => this.setState({nombre: event.target.value})}></input>
-              <button className="buscar" onClick={this.filtrarNombre.bind(this)}> Filtrar por nombre </button>
-          <br></br>
-
-        {/* Apellido */}
-          {/* <input value={this.state.apellido} onChange={this.handleChange} placeholder="Apellido"className="inputBuscador"> </input> S*/}
-          <input className="inputBuscador" placeholder="Apellido" onChange={(event) => this.setState({apellido: event.target.value})}></input>
-          <button className="buscar" onClick={this.filtrarApellido.bind(this)}> Filtrar por apellido </button>
-          <br></br>
-
-        {/* Edad */}
-           {/* <input value={this.state.edad} onChange={this.handleChange} placeholder="Edad"className="inputBuscador"> </input> */}
-          <input className="inputBuscador" placeholder="Edad" onChange={(event) => this.setState({edad: event.target.value})}></input> 
-          <button className="buscar" onClick={this.filtrarEdad.bind(this)}> Filtrar por edad </button> 
-
-
-      <div> Ordenar por: 
-           <button className="orden" onClick={this.ordenarAscendete}> Ascendente </button>
-           <button className="orden" onClick={this.ordenarDescendente}> Descendente </button>
-      </div>
-
-     </div>
     </div>
-  </div>
+    
             
           {/* <Agregar/> */}
-          <br></br>
+          {/* <br></br>
 
           <div className="agregado">
               <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
@@ -265,7 +207,7 @@ class Tarjeta extends Component{
 
             </div>
           ))}
-        </ul>
+        </ul> */}
 
         </React.Fragment>
       )
