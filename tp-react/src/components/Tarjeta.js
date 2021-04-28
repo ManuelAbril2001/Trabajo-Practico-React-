@@ -2,6 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import Masinfo from './Masinfo';
 import Agregar from './Agregar';
+import Filtrador from './Filtrador';
 //import {Modal, TextField, Button, withWidth} from '@material-ui/core';
 //import {makestyles, withTheme} from '@material-ui/core/styles';
 
@@ -12,7 +13,7 @@ class Tarjeta extends Component{
         this.ordenarDescendente = this.ordenarDescendente.bind(this);
         this.state={
           numero: "",
-          items: []
+          items: [],
         };
         
         // buscador
@@ -43,14 +44,6 @@ class Tarjeta extends Component{
   
       }
 
-  // DESPLAZAMIENTO
-  // cambiarDespla(){
-   
-  // }
-
-
-   
-
   ordenarAscendente(){
     this.setState(prevState => {
       this.state.item.name.sort((a,b) => (a.first - b.first))
@@ -63,7 +56,6 @@ class Tarjeta extends Component{
     });
   }
 
-  // AGREGAR
   abrirFormulario(){
     var x = document.getElementById("formulario");
      if (x.style.display === "none") {
@@ -73,6 +65,7 @@ class Tarjeta extends Component{
     }
       console.log(x.style.display)
   }   
+ 
 
   agregarTarjeta(){
     console.log(this.state.numero)
@@ -94,7 +87,6 @@ class Tarjeta extends Component{
 
 
   // BORRAR
-
   borrarTarjeta(idItem){
      console.log(idItem)
       let resultado = this.state.items.filter((item)=> {
@@ -102,37 +94,6 @@ class Tarjeta extends Component{
       })
       this.setState({items: resultado});
   }
-
-
-  // FILTROS
-  filtrarTarjetas(){
-    let filtrardata = document.getElementById("input").value
-    let filtrador = document.getElementById("select").value
-
-    console.log(filtrardata)
-    console.log(filtrador)
-
-
-    if (filtrador === "Edad"){
-      let resultado = this.state.items.filter( (item) => {
-        return item.dob.age == filtrardata 
-      }) 
-      this.setState({items: resultado})
-    } else if (filtrador === "Nombre"){
-      let resultado = this.state.items.filter( (item) => {
-        return item.name.first.includes(filtrardata)
-      })
-      this.setState({items: resultado})
-    } else if (filtrador === "Sexo"){
-      let resultado = this.state.items.filter( (item) => {
-        return item.gender === filtrardata
-      })  
-      this.setState({items:resultado})
-    }
-  }
-
-
-
 
   // VISTA
   render() {
@@ -146,36 +107,11 @@ class Tarjeta extends Component{
         <React.Fragment>
         
         <h1 className="titulo">TARJETAS</h1>
-          
-        {/* <div className="horver">
-          <button className="desplazamiento" onClick={this.cambiarDespla.bind(this)}> Cambiar desplazamiento</button>
-        </div> */}
-
         <br></br>
-
-
- 
-    <div>
-    <label>Filtrar</label>
-          <select id="select">
-               <option>Nombre</option>
-               <option>Edad</option>
-               <option>Sexo</option>
-          </select>
-
-                  <input className="inputData" id="input" name="filtro" />
-
-                  <div className="">
-                    <button className="" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
-                    <button className="" onClick={this.componentDidMount.bind(this)}>Resetear </button>
-                  </div>
-
-    
-    </div>
-    
-            
-          {/* <Agregar/> */}
-          {/* <br></br>
+        <Filtrador/>
+        {/* <Agregar/> */}
+          
+           <br></br>
 
           <div className="agregado">
               <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
@@ -189,7 +125,7 @@ class Tarjeta extends Component{
             </div>
           <br></br>
           <br></br>
-        
+
         <ul>
           {items.map(item => (
             <div className="info" key={item.login.uuid}>
@@ -207,7 +143,7 @@ class Tarjeta extends Component{
 
             </div>
           ))}
-        </ul> */}
+        </ul> 
 
         </React.Fragment>
       )

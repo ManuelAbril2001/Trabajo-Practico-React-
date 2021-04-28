@@ -1,5 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
+import Masinfo from './Masinfo';
 
 class Agregar extends Component{
     constructor(props) {
@@ -39,6 +40,7 @@ class Agregar extends Component{
     }
       console.log(x.style.display)
   }   
+ 
 
   agregarTarjeta(){
     console.log(this.state.numero)
