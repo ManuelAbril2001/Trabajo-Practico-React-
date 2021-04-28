@@ -105,7 +105,31 @@ class Tarjeta extends Component{
 
 
   // FILTROS
- 
+  filtrarTarjetas(){
+    let filtrardata = document.getElementById("input").value
+    let filtrador = document.getElementById("select").value
+
+    console.log(filtrardata)
+    console.log(filtrador)
+
+
+    if (filtrador === "Edad"){
+      let resultado = this.state.items.filter( (item) => {
+        return item.dob.age == filtrardata 
+      }) 
+      this.setState({items: resultado})
+    } else if (filtrador === "Nombre"){
+      let resultado = this.state.items.filter( (item) => {
+        return item.name.first.includes(filtrardata)
+      })
+      this.setState({items: resultado})
+    } else if (filtrador === "Sexo"){
+      let resultado = this.state.items.filter( (item) => {
+        return item.gender === filtrardata
+      })  
+      this.setState({items:resultado})
+    }
+  }
 
 
 
@@ -121,7 +145,7 @@ class Tarjeta extends Component{
       return (
         <React.Fragment>
         
-        <h1 className="titulo"></h1>
+        <h1 className="titulo">TARJETAS</h1>
           
         {/* <div className="horver">
           <button className="desplazamiento" onClick={this.cambiarDespla.bind(this)}> Cambiar desplazamiento</button>
@@ -131,7 +155,23 @@ class Tarjeta extends Component{
 
 
  
+    <div>
+    <label>Filtrar</label>
+          <select id="select">
+               <option>Nombre</option>
+               <option>Edad</option>
+               <option>Sexo</option>
+          </select>
 
+                  <input className="inputData" id="input" name="filtro" />
+
+                  <div className="">
+                    <button className="" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
+                    <button className="" onClick={this.componentDidMount.bind(this)}>Resetear </button>
+                  </div>
+
+    
+    </div>
     
             
           {/* <Agregar/> */}
