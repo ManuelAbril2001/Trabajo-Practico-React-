@@ -13,7 +13,10 @@ class Filtrador extends Component {
           error: null,
           isLoaded: false,
           numero: "",
-          items: []
+          items: [],
+          textoNombre: "",
+          textoApellido: "",
+          textoEdad: "",
         };
       }
       
@@ -76,29 +79,36 @@ class Filtrador extends Component {
           console.log(x.style.display)
       }   
 
-      filtrarTarjetas(){
-        let filtrardata = document.getElementById("input").value
-        let filtrador = document.getElementById("select").value
+      filtrarNombre(){
+        fetch("https://randomuser.me/api/?inc=name="+ this.state.textoNombre) 
+        .then(resource => resource.json())
+        .then(data => {
+          console.log(data)
+          let nombre = this.state.items.push(data.results);
+          this.setState({items: nombre});
+      })
+    }   
+
     
-        
-    
-        if (filtrador === "Edad"){
-          let resultado = this.state.items.filter( (item) => {
-            return item.dob.age == filtrardata 
-          }) 
-          this.setState({items: resultado})
-        } else if (filtrador === "Nombre"){
-          let resultado = this.state.items.filter( (item) => {
-            return item.name.first.includes(filtrardata)
-          })
-          this.setState({items: resultado})
-        } else if (filtrador === "Sexo"){
-          let resultado = this.state.items.filter( (item) => {
-            return item.gender === filtrardata
-          })  
-          this.setState({items:resultado})
-        }
-      }
+  filtrarApellido(){
+    fetch("https://randomuser.me/api/?inc=lastname="+ this.state.textoApellido) 
+    .then(resource => resource.json())
+    .then(data => {
+      console.log(data)
+      let apellido = this.state.items.push(data.results);
+      this.setState({items: apellido});
+  })
+  } 
+
+  filtrarEdad(){
+    fetch("https://randomuser.me/api/?inc=age="+ this.state.textoEdad) 
+    .then(resource => resource.json())
+    .then(data => {
+      console.log(data)
+      let edad = this.state.items.push(data.results);
+      this.setState({items: edad});
+  })
+  }
 
       render(){
 
@@ -116,16 +126,22 @@ class Filtrador extends Component {
                 {/* FILTRO */}
 
             <label>Filtrar</label>
-                  <select id="select">
-                       <option>Nombre</option>
-                       <option>Edad</option>
-                       <option>Sexo</option>
-                  </select>
-        
-                          <input className="inputData" id="input" name="filtro" />
-        
+                      <div> 
+                        <input className="inputData" placeholder="nombre" onChange={(event) => this.setState({textoNombre: event.target.value})}  name="filtro" /> 
+                        <button className="" onClick={this.filtrarNombre.bind(this)}>Filtrar</button>
+                      </div>
+                          
+                          <div> 
+                            <input className="inputData" placeholder="apellido" onChange={(event) => this.setState({textoApellido: event.target.value})}  name="filtro" />
+                            <button className="" onClick={this.filtrarApellido.bind(this)}>Filtrar</button>
+                             </div>
+                          <div> 
+                            <input className="inputData"placeholder="edad" onChange={(event) => this.setState({textoEdad: event.target.value})}  name="filtro" /> 
+                            <button className="" onClick={this.filtrarEdad.bind(this)}>Filtrar</button>
+                             </div>
+          
                           <div className="">
-                            <button className="" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
+                           
                             <button className="" onClick={this.componentDidMount.bind(this)}>Resetear </button>
                           </div>
 
@@ -171,8 +187,8 @@ class Filtrador extends Component {
         <div className="divTarjetas">
                     {items.map(item=> (
                     
-                    <Tarjeta nombre={item.name.first} apellido={item.name.last} mail={item.email} 
-                    fecha={item.dob.date} edad={item.dob.age} foto={item.picture.large} 
+                    <Tarjeta Nombre={item.name.first} Apellido={item.name.last} mail={item.email} 
+                    fecha={item.dob.date} Edad={item.dob.age} foto={item.picture.large} 
                     id={item.login.uuid} borrarTarjeta= {this.borrarTarjeta.bind(this)}/>
 
                     ))}
