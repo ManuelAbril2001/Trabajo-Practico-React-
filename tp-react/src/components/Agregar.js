@@ -5,6 +5,7 @@ import Masinfo from './Masinfo';
 class Agregar extends Component{
     constructor(props) {
         super(props);
+        this.abrirFormulario = this.abrirFormulario.bind(this)
         this.state={
          numero: "",
         };

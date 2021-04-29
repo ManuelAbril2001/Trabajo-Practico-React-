@@ -115,26 +115,33 @@ button{
     font-family: 'Courier New', Courier, monospace;
 }
 
-.orden:hover {
-    background-color:lightsteelblue;
+#filtrador{
+    display: none;
+    float: left;
+    padding: 3px;
+}
+
+.filtrar:hover {
+    background-color: red ;
     color: white;
 }
 
-.orden{
-    border: 2px solid lightsteelblue;
-    position: relative;
-}
-
-.filtros:hover {
-    background-color: rgb(66, 152, 238) ;
-    color: white;
-}
-
-.filtros{
-    border: 2px solid rgb(66, 152, 238) ;
+.filtrar{
+    border: 2px solid red;
     position: relative;
     float: left;
     font-size: small;
+}
+
+.filtrdado:hover {
+    background-color: pink ;
+    color: white;
+}
+
+.filtrado{
+    border: 2px solid pink;
+    position: relative;
+    font-size: x-small;
 }
 
 .inputBuscador{
@@ -204,7 +211,6 @@ input.valor{
 .detalles:hover {
     background-color: rgb(238, 149, 66);
     color: white;
-    font-size: x-small;
 }
 
 .detalle{

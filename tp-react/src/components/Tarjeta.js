@@ -9,15 +9,10 @@ import Filtrador from './Filtrador';
 class Tarjeta extends Component{
     constructor(props) {
         super(props);
-        this.ordenarAscendente = this.ordenarAscendente.bind(this);
-        this.ordenarDescendente = this.ordenarDescendente.bind(this);
         this.state={
           numero: "",
           items: [],
         };
-        
-        // buscador
-
       }
     
       componentDidMount() {
@@ -44,18 +39,7 @@ class Tarjeta extends Component{
   
       }
 
-  ordenarAscendente(){
-    this.setState(prevState => {
-      this.state.item.name.sort((a,b) => (a.first - b.first))
-    });
-  }
-
-  ordenarDescendente(){
-    this.setState(prevState => {
-      this.state.item.name.sort((a,b) => (b.first - a.first))
-    });
-  }
-
+  // AGREGAR
   abrirFormulario(){
     var x = document.getElementById("formulario");
      if (x.style.display === "none") {
@@ -109,9 +93,7 @@ class Tarjeta extends Component{
         <h1 className="titulo">TARJETAS</h1>
         <br></br>
         <Filtrador/>
-        {/* <Agregar/> */}
-          
-           <br></br>
+        <br></br>
 
           <div className="agregado">
               <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
