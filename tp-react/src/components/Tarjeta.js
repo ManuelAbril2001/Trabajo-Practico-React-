@@ -14,16 +14,12 @@ class Tarjeta extends Component{
           isLoaded: false,
           numero: "",
           items: [],
-          // nombre: "",
-          // apellido: "",
-          // edad:"",
-          // api: [],
-          // value: "",
+
       }
     }
     
       componentDidMount() {
-        fetch("https://randomuser.me/api/?results=10")
+        fetch("https://randomuser.me/api/?results=4")
           .then(res => res.json())
           .then(
             (data) => {
@@ -119,32 +115,6 @@ filtrarTarjetas(){
 }
 
 
-//  filtrarNombre(){
-//   let nombre = this.state.value.toLowerCase()
-//   let resultado = this.state.api.filter((api) =>{
-//     return api.name.first.toLowerCase().includes(nombre)
-//   });
-//   console.log(resultado)
-//     this.setState({api: resultado});
-// }
-
-// filtrarApellido(){
-//   let apellido = this.state.value.toLowerCase()
-//   let resultado = this.state.api.filter((api) =>{
-//     return api.name.first.toLowerCase().includes(apellido)
-//   });
-//   console.log(resultado)
-//     this.setState({api: resultado});
-// }
-
-// filtrarEdad(){
-//   let edad = this.state.value
-//   let resultado = this.state.api.filter((api) =>{
-//     return api.dob.age === edad
-//   });
-//   console.log(resultado)
-//     this.setState({api: resultado});
-// }
 
   // VISTA
   render() {
@@ -156,19 +126,11 @@ filtrarTarjetas(){
     } else {
       return (
         <React.Fragment>
+          <body>
         
         <h1 className="titulo">TARJETAS</h1>
         <br></br>
-        {/* 
-              <input className="valorf" placeholder="por nombre" ></input>
-              <button className="filtrado" >Filtrar</button>
-            <br></br>
-              <input className="valorf" placeholder="por apellido"></input>
-              <button className="filtrado">Filtrar</button>
-            <br></br>
-              <input className="valorf" placeholder="por edad" type="number"></input>
-              <button className="filtrado">Filtrar</button>
-            <br></br>*/}
+ 
 
           <button className="filtrar" onClick={this.abrirFiltrador.bind(this)}> Filtrar tarjetas </button>
            <div id="filtrador">
@@ -219,6 +181,7 @@ filtrarTarjetas(){
             </div>
           ))}
         </ul> 
+        </body>
 
         </React.Fragment>
       )

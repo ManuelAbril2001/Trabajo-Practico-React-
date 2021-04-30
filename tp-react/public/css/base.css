@@ -235,10 +235,9 @@ footer{
     font-size: x-small;
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    text-align: right;
-    height: 30px;
+    text-align: center;
+    height: 20px;
     position: fixed;
     width: 100%;
-    margin-left: -1;
-    bottom: 0;
+    bottom: 0%;
 }
