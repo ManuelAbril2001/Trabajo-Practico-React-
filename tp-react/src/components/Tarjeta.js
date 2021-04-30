@@ -10,13 +10,20 @@ class Tarjeta extends Component{
     constructor(props) {
         super(props);
         this.state={
+          error: null,
+          isLoaded: false,
           numero: "",
           items: [],
-        };
+          // nombre: "",
+          // apellido: "",
+          // edad:"",
+          // api: [],
+          // value: "",
       }
+    }
     
       componentDidMount() {
-        fetch("https://randomuser.me/api/?results=5")
+        fetch("https://randomuser.me/api/?results=10")
           .then(res => res.json())
           .then(
             (data) => {
@@ -25,18 +32,14 @@ class Tarjeta extends Component{
                 isLoaded: true,
                 items: data.results
               });
-              
-            },
-            
+            },            
             (error) => {
               this.setState({
                 isLoaded: true,
                 error
               });
             }
-          )
-
-  
+          )  
       }
 
   // AGREGAR
@@ -48,8 +51,7 @@ class Tarjeta extends Component{
       x.style.display = "none";
     }
       console.log(x.style.display)
-  }   
- 
+  }
 
   agregarTarjeta(){
     console.log(this.state.numero)
@@ -79,6 +81,71 @@ class Tarjeta extends Component{
       this.setState({items: resultado});
   }
 
+  //FILTRAR
+abrirFiltrador(){
+    var x = document.getElementById("filtrador");
+     if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+      console.log(x.style.display)
+}
+
+filtrarTarjetas(){
+  let datofiltrar = document.getElementById("inputusuario").value
+  let filtrado = document.getElementById("eleccion").value
+
+  console.log(datofiltrar)
+  console.log(filtrado)
+
+
+  if (filtrado === "Edad"){
+    let resultado = this.state.items.filter( (item) => {
+      return item.dob.age == datofiltrar 
+    }) 
+    this.setState({items: resultado})
+  } else if (filtrado === "Nombre"){
+    let resultado = this.state.items.filter( (item) => {
+      return item.name.first.includes(datofiltrar)
+    })
+    this.setState({items: resultado})
+  } else if (filtrado === "Apellido"){
+    let resultado = this.state.items.filter( (item) => {
+      return item.name.last === datofiltrar
+    })  
+    this.setState({items:resultado})
+  }
+}
+
+
+//  filtrarNombre(){
+//   let nombre = this.state.value.toLowerCase()
+//   let resultado = this.state.api.filter((api) =>{
+//     return api.name.first.toLowerCase().includes(nombre)
+//   });
+//   console.log(resultado)
+//     this.setState({api: resultado});
+// }
+
+// filtrarApellido(){
+//   let apellido = this.state.value.toLowerCase()
+//   let resultado = this.state.api.filter((api) =>{
+//     return api.name.first.toLowerCase().includes(apellido)
+//   });
+//   console.log(resultado)
+//     this.setState({api: resultado});
+// }
+
+// filtrarEdad(){
+//   let edad = this.state.value
+//   let resultado = this.state.api.filter((api) =>{
+//     return api.dob.age === edad
+//   });
+//   console.log(resultado)
+//     this.setState({api: resultado});
+// }
+
   // VISTA
   render() {
     const { error, isLoaded, items } = this.state;
@@ -92,7 +159,33 @@ class Tarjeta extends Component{
         
         <h1 className="titulo">TARJETAS</h1>
         <br></br>
-        <Filtrador/>
+        {/* 
+              <input className="valorf" placeholder="por nombre" ></input>
+              <button className="filtrado" >Filtrar</button>
+            <br></br>
+              <input className="valorf" placeholder="por apellido"></input>
+              <button className="filtrado">Filtrar</button>
+            <br></br>
+              <input className="valorf" placeholder="por edad" type="number"></input>
+              <button className="filtrado">Filtrar</button>
+            <br></br>*/}
+
+          <button className="filtrar" onClick={this.abrirFiltrador.bind(this)}> Filtrar tarjetas </button>
+           <div id="filtrador">
+            <select id="eleccion">
+              <option>Nombre</option>
+              <option>Apellido</option>
+              <option>Edad</option>
+            </select>
+
+            <input className="inputusuario" id="inputusuario"/>
+
+              <div className="div-botones">
+                <button className="filtrado" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
+                <button className="filtrado"onClick={this.componentDidMount.bind(this)}>Reset</button>
+              </div>
+            </div>
+
         <br></br>
 
           <div className="agregado">

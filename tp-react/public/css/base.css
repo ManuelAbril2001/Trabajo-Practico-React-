@@ -133,13 +133,13 @@ button{
     font-size: small;
 }
 
-.filtrdado:hover {
-    background-color: pink ;
+.filtrado:hover {
+    background-color: rgb(128, 16, 16) ;
     color: white;
 }
 
 .filtrado{
-    border: 2px solid pink;
+    border: 2px solid rgb(128, 16, 16);
     position: relative;
     font-size: x-small;
 }
@@ -175,6 +175,13 @@ button{
 
 input.valor{
     width: 70px;
+    height: 20px;
+    border-color: black;
+    border-width: thin;
+}
+
+input.valorf{
+    width: 90px;
     height: 20px;
     border-color: black;
     border-width: thin;
@@ -232,5 +239,6 @@ footer{
     height: 30px;
     position: fixed;
     width: 100%;
+    margin-left: -1;
     bottom: 0;
 }
