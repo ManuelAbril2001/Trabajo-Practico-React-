@@ -94,7 +94,7 @@ filtrarTarjetas(){
 
   if (filtrado === "Edad"){
     let resultado = this.state.items.filter( (item) => {
-      return item.dob.age === datofiltrar 
+      return item.dob.age == datofiltrar 
     }) 
     this.setState({items: resultado})
   } else if (filtrado === "Nombre"){
@@ -104,7 +104,7 @@ filtrarTarjetas(){
     this.setState({items: resultado})
   } else if (filtrado === "Apellido"){
     let resultado = this.state.items.filter( (item) => {
-      return item.name.last === datofiltrar
+      return item.name.last.includes(datofiltrar)
     })  
     this.setState({items:resultado})
   }
@@ -140,9 +140,13 @@ filtrarTarjetas(){
 
               <div className="div-botones">
                 <button className="filtrado" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
-                <button className="filtrado"onClick={this.componentDidMount.bind(this)}>Recargar</button>
+                
               </div>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <button className="recargo" onClick={this.componentDidMount.bind(this)}>Recargar tarjetas</button>
 
         <br></br>
         {/* AGREGAR */}

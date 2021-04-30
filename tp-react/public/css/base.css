@@ -144,15 +144,15 @@ button{
     font-size: x-small;
 }
 
-.inputBuscador{
-    border: 2px solid rgb(66, 152, 238);
-    position: relative;
-    float: center;
+.recargo:hover {
+    background-color: violet;
+    color: white;
 }
 
-.inputBuscador:hover {
-    background-color: rgb(66, 152, 238) ;
-    color: white;
+.recargo{
+    border: 2px solid violet;
+    position: relative;
+    font-size: small;
 }
 
 .agregar:hover {
