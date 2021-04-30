@@ -1,10 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
 import Masinfo from './Masinfo';
-import Agregar from './Agregar';
-import Filtrador from './Filtrador';
-//import {Modal, TextField, Button, withWidth} from '@material-ui/core';
-//import {makestyles, withTheme} from '@material-ui/core/styles';
 
 class Tarjeta extends Component{
     constructor(props) {
@@ -19,7 +15,7 @@ class Tarjeta extends Component{
     }
     
       componentDidMount() {
-        fetch("https://randomuser.me/api/?results=4")
+        fetch("https://randomuser.me/api/?results=6")
           .then(res => res.json())
           .then(
             (data) => {
@@ -51,7 +47,7 @@ class Tarjeta extends Component{
 
   agregarTarjeta(){
     console.log(this.state.numero)
-      fetch("https://randomuser.me/api/?results="+ this.state.numero )
+    fetch("https://randomuser.me/api/?results="+ this.state.numero )
       .then(resource => resource.json())
       .then(data => {
         console.log(data)
@@ -98,7 +94,7 @@ filtrarTarjetas(){
 
   if (filtrado === "Edad"){
     let resultado = this.state.items.filter( (item) => {
-      return item.dob.age == datofiltrar 
+      return item.dob.age === datofiltrar 
     }) 
     this.setState({items: resultado})
   } else if (filtrado === "Nombre"){
@@ -131,7 +127,7 @@ filtrarTarjetas(){
         <h1 className="titulo">TARJETAS</h1>
         <br></br>
  
-
+          {/* FILTRAR */}
           <button className="filtrar" onClick={this.abrirFiltrador.bind(this)}> Filtrar tarjetas </button>
            <div id="filtrador">
             <select id="eleccion">
@@ -144,12 +140,12 @@ filtrarTarjetas(){
 
               <div className="div-botones">
                 <button className="filtrado" onClick={this.filtrarTarjetas.bind(this)}>Filtrar</button>
-                <button className="filtrado"onClick={this.componentDidMount.bind(this)}>Reset</button>
+                <button className="filtrado"onClick={this.componentDidMount.bind(this)}>Recargar</button>
               </div>
             </div>
 
         <br></br>
-
+        {/* AGREGAR */}
           <div className="agregado">
               <div className="botonAgregar"><button className="agregar" onClick={this.abrirFormulario.bind(this)}> Agregar tarjetas </button></div>        
                 <br></br>
@@ -163,18 +159,19 @@ filtrarTarjetas(){
           <br></br>
           <br></br>
 
+        {/* TARJETA */}
         <ul>
           {items.map(item => (
             <div className="info" key={item.login.uuid}>
              <button className="borrar" onClick={this.borrarTarjeta.bind(this, item.login.uuid)}> X </button>
-            
-            <div className="datos"> 
-              <span className="nombreapellido"> {item.name.first} {item.name.last} </span>
-              <br></br>
-              <img src={item.picture.large} alt="foto de perfil" className="imagen"/>
-              <div> <span className="cosas1">Email:</span> {item.email} </div>
-              <div> <span className="cosas1">Fecha de nacimiento:</span> {item.dob.date.substring(0,10)} ({item.dob.age}) </div>
-            </div>
+      
+              <div className="datos"> 
+                <span className="nombreapellido"> {item.name.first} {item.name.last} </span>
+                <br></br>
+                <img src={item.picture.large} alt="foto de perfil" className="imagen"/>
+                <div> <span className="cosas1">Email:</span> {item.email} </div>
+                <div> <span className="cosas1">Fecha de nacimiento:</span> {item.dob.date.substring(0,10)} ({item.dob.age}) </div>
+              </div>
 
              <Masinfo/>
 

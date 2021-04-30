@@ -4,7 +4,7 @@ import {Component} from 'react';
 class Masinfo extends Component{
     constructor() {
         super()
-        this.title = React.createRef()
+        this.info = React.createRef()
         this.desplegarInfo = this.desplegarInfo.bind(this)
         this.state = {
           error: null,
@@ -34,11 +34,11 @@ class Masinfo extends Component{
       }
 
   desplegarInfo(){
-    console.log(this.title)
-    if(this.title.current.style.display === "none"){
-        this.title.current.style.display = "block";
+    console.log(this.info)
+    if(this.info.current.style.display === "none"){
+        this.info.current.style.display = "block";
     } else{
-        this.title.current.style.display = "none";
+        this.info.current.style.display = "none";
     }
   }
 
@@ -54,7 +54,7 @@ class Masinfo extends Component{
           <div>
             <button className="detalles" onClick={this.desplegarInfo}> Ver más detalles </button>
               {items.map(item => (
-                <div id="detalle" className="detalle" ref={this.title} style={{display:'none'}}>
+                <div id="detalle" className="detalle" ref={this.info} style={{display:'none'}}>
                       <div><span className="cosas2">Calle y número:</span>{item.location.street.number}</div>
                       <div><span className="cosas2">Ciudad/Estado:</span> {item.location.city}</div>
                       <div><span className="cosas2">País:</span> {item.location.country}</div>
